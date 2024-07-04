@@ -3,6 +3,7 @@
 import axios from "axios";
 import { ChangeEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
+import { signup } from "@/app/actions/user";
 export function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -37,20 +38,7 @@ export function Signup() {
 
               <button
                 onClick={async () => {
-                  try {
-                    await axios.post("http://localhost:3000/api/user", {
-                      username,
-                      password,
-                    });
-                    // Navigate only after a successful POST request
-                    router.push("/");
-                  } catch (error) {
-                    // Handle errors (e.g., show an error message to the user)
-                    console.error(
-                      "An error occurred during the sign-up/login process",
-                      error
-                    );
-                  }
+                signup(username,password);
                 }}
                 type="button"
                 className="mt-8 w-full text-white bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
